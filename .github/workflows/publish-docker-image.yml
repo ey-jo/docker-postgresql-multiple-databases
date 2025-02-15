@@ -31,4 +31,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/multi-postgres:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/multi-postgres:latest
