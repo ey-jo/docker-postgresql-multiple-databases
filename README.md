@@ -82,3 +82,32 @@ services:
 ### Explanation
 
 This creates a root user named `root` with the password `password`. Two databases `db1` and `db2` are created with corresponding users `user1` and `user2`, each with their respective passwords `pass1` and `pass2`. Backups are configured to keep the last 5 backups, run daily at 2 AM.
+
+## Automated Publishing Workflow
+
+This repository includes a GitHub Actions workflow to automate the process of building and publishing the Docker image to Docker Hub.
+
+### Workflow File
+
+The workflow file is located at `.github/workflows/publish-docker-image.yml`.
+
+### Triggers
+
+The workflow is triggered on the following events:
+- Push to the `master` branch
+- Pull request to the `master` branch
+
+### Steps
+
+The workflow performs the following steps:
+1. Checkout the repository
+2. Set up Docker Buildx
+3. Log in to Docker Hub
+4. Build the Docker image using the `Dockerfile`
+5. Push the Docker image to Docker Hub
+
+### Docker Hub Credentials
+
+To use this workflow, you need to provide your Docker Hub credentials as secrets in your GitHub repository. The required secrets are:
+- `DOCKERHUB_USERNAME`: Your Docker Hub username
+- `DOCKERHUB_TOKEN`: Your Docker Hub access token
