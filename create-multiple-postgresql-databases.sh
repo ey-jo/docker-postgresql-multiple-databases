@@ -1,22 +1,35 @@
 #!/bin/bash
+set -e  # Exit immediately if a command exits with a non-zero status
 
-set -e
-set -u
-
+# Function to create a user and a database
 function create_user_and_database() {
-	local database=$1
-	echo "  Creating user and database '$database'"
-	psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
-	    CREATE USER $database;
-	    CREATE DATABASE $database;
-	    GRANT ALL PRIVILEGES ON DATABASE $database TO $database;
-EOSQL
+    local user=$1
+    local password=$2
+    local db=$3
+
+    # Check if password is provided, create user accordingly
+    if [ -z "$password" ]; then
+        echo "CREATE USER ${user};"
+    else
+        echo "CREATE USER ${user} WITH PASSWORD '${password}';"
+    fi
+    echo "CREATE DATABASE ${db};"
+    echo "GRANT ALL PRIVILEGES ON DATABASE ${db} TO ${user};"
 }
 
-if [ -n "$POSTGRES_MULTIPLE_DATABASES" ]; then
-	echo "Multiple database creation requested: $POSTGRES_MULTIPLE_DATABASES"
-	for db in $(echo $POSTGRES_MULTIPLE_DATABASES | tr ',' ' '); do
-		create_user_and_database $db
-	done
-	echo "Multiple databases created"
-fi
+# Convert comma-separated strings to arrays
+IFS=',' read -r -a users <<< "$LIST_USER"
+IFS=',' read -r -a passwords <<< "$LIST_PASSWORD"
+IFS=',' read -r -a databases <<< "$LIST_DATABASE"
+
+# Create users and databases
+for i in "${!users[@]}"; do
+    user="${users[$i]}"
+    password="${passwords[$i]}"
+    db="${databases[$i]}"
+
+    # Execute the SQL commands to create user and database
+    psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+        $(create_user_and_database "$user" "$password" "$db")
+EOSQL
+done
