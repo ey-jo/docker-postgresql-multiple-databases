@@ -27,5 +27,5 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: eyjo1/multi-postgres
-        short-description: ${{ github.event.repository.description }}
+        short-description: "PostgreSQL image with multiple databases and users and backup support."
         enable-url-completion: true
