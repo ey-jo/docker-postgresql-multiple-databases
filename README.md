@@ -1,6 +1,9 @@
-# Using multiple databases with the official PostgreSQL Docker image
+# multi-postgres: Using multiple databases with the official PostgreSQL Docker image
 
-This Docker image is based on the [official PostgreSQL](https://hub.docker.com/_/postgres) database with the ability to create multiple databases and users at startup. Additionally, it supports automated backups with configurable retention policies and scheduling options.
+This Docker image extends the [official PostgreSQL](https://hub.docker.com/_/postgres)  image to support the creation of multiple databases and users at startup, as well as automated backups with configurable retention policies and scheduling options. It is ideal for environments where multiple isolated databases are required, and regular backups are essential.
+
+
+Available on docker: [eyjo1/multi-postgres](https://hub.docker.com/r/eyjo1/multi-postgres)
 
 ## Usage
 
@@ -53,7 +56,7 @@ docker run -d \
     -e BACKUP_HOUR=2 \
     -v /path/to/data:/var/lib/postgresql/data \
     -v /path/to/backups:/backups \
-    <enter image name>
+    eyjo1/multi-postgres
 ```
 
 ### Docker Compose Example
@@ -61,7 +64,7 @@ docker run -d \
 ```yaml
 services:
   postgres:
-    image: <enter image name>
+    image: eyjo1/multi-postgres
     container_name: postgres
     ports:
       - 5432:5432
