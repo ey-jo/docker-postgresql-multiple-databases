@@ -4,6 +4,7 @@ This Docker image extends the [official PostgreSQL](https://hub.docker.com/_/pos
 
 
 Available on docker: [eyjo1/multi-postgres](https://hub.docker.com/r/eyjo1/multi-postgres)
+See on github: [ey-jo/docker-postgresql-multiple-databases](https://github.com/ey-jo/docker-postgresql-multiple-databases)
 
 ## Usage
 
@@ -69,14 +70,14 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_USER: root
-      - POSTGRES_PASSWORD: password
-      - LIST_DATABASE: db1,db2
-      - LIST_USER: user1,user2
-      - LIST_PASSWORD: pass1,pass2
-      - BACKUP_LIMIT: 5
-      - BACKUP_INTERVAL: 1
-      - BACKUP_HOUR: 2
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+      LIST_DATABASE: db1,db2
+      LIST_USER: user1,user2
+      LIST_PASSWORD: pass1,pass2
+      BACKUP_LIMIT: 5
+      BACKUP_INTERVAL: 1
+      BACKUP_HOUR: 2
     volumes:
       - /path/to/data:/var/lib/postgresql/data
       - /path/to/backups:/backups
