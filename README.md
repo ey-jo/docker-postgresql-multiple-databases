@@ -12,7 +12,7 @@ See on github: [ey-jo/docker-postgresql-multiple-databases](https://github.com/e
 All configurations from the official Postgres image are available.
 
 #### Required Parameters
-- `POSTGRES_USER`: The username for the PostgreSQL superuser. Will be used as root and for all automated tasks.
+- `POSTGRES_USER`: The username for the PostgreSQL superuser. Will be used as root and for all automated tasks. If not provided "root" will be used.
 
 #### Optional Parameters
 ##### User and DB Creation
