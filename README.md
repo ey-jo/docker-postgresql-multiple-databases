@@ -6,6 +6,11 @@ This Docker image extends the [official PostgreSQL](https://hub.docker.com/_/pos
 Available on docker: [eyjo1/multi-postgres](https://hub.docker.com/r/eyjo1/multi-postgres)
 See on github: [ey-jo/docker-postgresql-multiple-databases](https://github.com/ey-jo/docker-postgresql-multiple-databases)
 
+
+## Still in Development
+Things may break. If you notice something, feel free to open an issue on GitHub.
+
+
 ## Usage
 
 ### Environment Parameters
