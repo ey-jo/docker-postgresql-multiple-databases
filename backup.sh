@@ -1,5 +1,6 @@
+#!/bin/bash
 # Source the variables from the .vars file
-source .vars
+. ./.vars
 
 # Create a backup of all PostgreSQL databases
 pg_dumpall -c -U ${POSTGRES_USER} > ${BACKUP_DIR}/db_`date +%Y-%m-%d"_"%H_%M_%S`.sql
